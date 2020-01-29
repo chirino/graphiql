@@ -12,6 +12,16 @@ type Handler struct {
 	Endpoint string
 }
 
+// New creates an *http.Handler to serve the graphiql ui.
+// The endpoint is the url where you have your graphql api hosted.
+func New(endpoint string) *Handler {
+	h, err := NewGraphiqlHandler(endpoint)
+	if err!=nil {
+		pannic(err)
+	}
+	return h
+}
+
 // NewGraphiqlHandler preparing the graphiql client to execute on your own server
 // The endpoint is the url where you have your graphql api hosted
 func NewGraphiqlHandler(endpoint string) (*Handler, error) {
